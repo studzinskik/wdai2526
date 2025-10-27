@@ -10,6 +10,7 @@ body {
 .s {
       width: 100px;
       height: 100px;
+      border: 5px solid white;
 }
 
 .c1 {
