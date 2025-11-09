@@ -1,0 +1,42 @@
+#board {
+    display: grid;
+    gap: 2px;
+    margin-top: 20px;
+    user-select: none;
+}
+.cell {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 40px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: monospace;
+}
+
+.cell.revealed {
+    background-color: #e9ecef;
+    cursor: default;
+}
+
+.cell.mine-exploded {
+    background-color: #dc3545;
+    color: white;
+}
+
+.cell.mine-uncovered {
+    background-color: #000000;
+    color: white;
+}
+
+.cell.mine-defused {
+    background-color: #2aae2a;
+    color: white;
+}
+
+.cell.flag {
+    background-color: #dcb535;
+    color: white;
+}
