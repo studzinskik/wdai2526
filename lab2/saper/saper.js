@@ -3,6 +3,8 @@ const cols = 8;
 const minesCount = 10;
 
 let board = [];
+let pressTimer = null;
+
 let firstClick = true;
 let gameOver = false;
 
@@ -14,6 +16,7 @@ function initBoard() {
 
     board = [];
     firstClick = true;
+    gameOver = false;
 
     for (let r = 0; r < rows; r++) {
         const row = [];
@@ -27,6 +30,20 @@ function initBoard() {
 
             cell.addEventListener("click", clickCell);
             cell.addEventListener("contextmenu", toggleFlag);
+
+            cell.addEventListener("touchstart", function () {
+                pressTimer = setTimeout(() => {
+                    toggleFlag.call(cell);
+                }, 500);
+            });
+
+            cell.addEventListener("touchend", function () {
+                clearTimeout(pressTimer);
+            });
+
+            cell.addEventListener("touchmove", function () {
+                clearTimeout(pressTimer);
+            });
 
             boardEl.appendChild(cell);
             row.push({el: cell, mine: false, revealed: false, neighborMines: 0, flagged: false});
@@ -82,7 +99,7 @@ function clickCell(_) {
     const c = parseInt(this.dataset.col);
     const cell = board[r][c];
 
-    if (cell.revealed || cell.flagged) {
+    if (cell.revealed || cell.flagged || gameOver) {
         return;
     }
 
@@ -102,7 +119,7 @@ function clickCell(_) {
 }
 
 function revealCell(cell) {
-    if (cell.revealed || cell.flagged) {
+    if (cell.revealed || cell.flagged || gameOver) {
         return;
     }
 
@@ -158,7 +175,7 @@ function toggleFlag(e) {
     const c = parseInt(this.dataset.col);
     const cell = board[r][c];
 
-    if (cell.revealed || firstClick) {
+    if (cell.revealed || firstClick || gameOver) {
         return;
     }
 
