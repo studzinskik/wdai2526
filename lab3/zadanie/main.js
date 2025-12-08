@@ -170,6 +170,7 @@ const pipes = {
                 bird.y + bird.radius > p.y && bird.y - bird.radius < p.y + this.h) {
                 state.current = state.over;
                 playAudio(HIT_S);
+                playAudio(DIE_S);
             }
 
             let bottomPipeY = p.y + this.h + this.gap;
@@ -178,6 +179,7 @@ const pipes = {
                 bird.y + bird.radius > bottomPipeY && bird.y - bird.radius < bottomPipeY + this.h) {
                 state.current = state.over;
                 playAudio(HIT_S);
+                playAudio(DIE_S);
             }
             
             if (!p.passed && bird.x > p.x + (this.w / 2)) {
