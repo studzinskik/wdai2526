@@ -1,0 +1,150 @@
+{
+  "info": {
+    "name": "lab4",
+    "_postman_id": "b6a7b0c6-1a9e-4e6a-9f89-agh-wdai",
+    "description": "wdai",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "users_url", "value": "http://localhost:3003" },
+    { "key": "books_url", "value": "http://localhost:3001" },
+    { "key": "orders_url", "value": "http://localhost:3002" },
+    { "key": "token", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@test.pl\",\n  \"password\": \"123456\"\n}"
+            },
+            "url": "{{users_url}}/api/register"
+          }
+        },
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const res = pm.response.json();",
+                  "pm.environment.set('token', res.token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@test.pl\",\n  \"password\": \"123456\"\n}"
+            },
+            "url": "{{users_url}}/api/login"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Books",
+      "item": [
+        {
+          "name": "Get all books",
+          "request": {
+            "method": "GET",
+            "url": "{{books_url}}/api/books"
+          }
+        },
+
+        {
+          "name": "Add book (auth)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Lalka\",\n  \"author\": \"Bolesław Prus\",\n  \"year\": 1890\n}"
+            },
+            "url": "{{books_url}}/api/books"
+          }
+        },
+
+        {
+          "name": "Delete book (auth)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "{{books_url}}/api/books/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Orders",
+      "item": [
+        {
+          "name": "Create order (auth)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": 1,\n  \"bookId\": 1,\n  \"quantity\": 2\n}"
+            },
+            "url": "{{orders_url}}/api/orders"
+          }
+        },
+        {
+          "name": "Get user orders (auth)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "{{orders_url}}/api/orders/1"
+          }
+        },
+        {
+          "name": "Update order quantity (auth)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"quantity\": 5 }"
+            },
+            "url": "{{orders_url}}/api/orders/1"
+          }
+        },
+        {
+          "name": "Delete order (auth)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "{{orders_url}}/api/orders/1"
+          }
+        }
+      ]
+    }
+  ]
+}
