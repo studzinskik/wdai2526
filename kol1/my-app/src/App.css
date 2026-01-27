@@ -1,0 +1,66 @@
+#root {
+    margin: 0 auto;
+    text-align: center;
+}
+
+body {
+    font-family: Arial;
+    padding: 20px;
+    background-color: #f8f8f8;
+}
+
+.recipe-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.recipe-card {
+    background: white;
+    padding: 15px;
+    border-radius: 7.5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.5s;
+    width: 500px;
+}
+
+.recipe-card.animate {
+    transform: translateY(-20px);
+}
+
+.recipe-info {
+    cursor: pointer;
+    flex-grow: 1;
+}
+
+.delete-btn {
+    background-color: #ff4444;
+    color: white;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.search-input {
+    flex-grow: 1;
+    padding: 10px;
+}
+
+.random-btn {
+    padding: 10px;
+    background-color: #4db851;
+    color: white;
+    cursor: pointer;
+}
+
+.recipe-details {
+    background: white;
+    padding: 20px;
+}

@@ -3,11 +3,9 @@ import { useState, useEffect } from "react";
 import type { Article } from "./components/blog/BlogTypes";
 import { Licznik2 } from "./components/liczniki/Licznik2";
 
-// --- Components for Blog ---
-
 const Home = () => (
     <div>
-        <h1>Witamy w naszym serwisie!</h1>
+        <h1>Blog</h1>
         <Link to="/blog">Przejdź do Bloga</Link>
         <br />
         <Link to="/licznik">Zadanie 8.1</Link>
